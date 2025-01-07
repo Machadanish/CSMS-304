@@ -1,0 +1,387 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Campus Security
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f172a;
+            color: #fff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1e293b;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+        .navbar .logo i {
+            margin-right: 10px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .navbar .user-info {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .navbar .user-info .user-icon {
+            width: 35px;
+            height: 35px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+        .navbar .user-info .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #1e293b;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .user-info .dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .navbar .user-info .dropdown a:hover {
+            background-color: #3b82f6;
+        }
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .content h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .update-card {
+            background-color: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .update-card img {
+            width: 100%;
+            height: auto;
+        }
+        .update-card .card-content {
+            padding: 15px;
+        }
+        .update-card .card-content .title {
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .update-card .card-content .title i {
+            margin-right: 10px;
+            color: #10b981;
+        }
+        .update-card .card-content .description {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .update-card .card-content .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #9ca3af;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+        .application {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .application img {
+            border-radius: 8px;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+        .application-details {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .application-details h2 {
+            margin: 0;
+            color: #333;
+        }
+        .application-details p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .application-actions {
+            display: flex;
+            align-items: center;
+        }
+        .application-actions button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 16px;
+        }
+        .application-actions button.reject {
+            background-color: #dc3545;
+        }
+        .application-actions button i {
+            margin-right: 5px;
+        }
+        .status {
+            font-size: 16px;
+            font-weight: bold;
+            color: #28a745;
+        }
+        .status.rejected {
+            color: #dc3545;
+        }
+  </style>
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+            const userInfo = document.querySelector('.user-info');
+            const dropdown = document.querySelector('.dropdown');
+
+            userInfo.addEventListener('click', function() {
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!userInfo.contains(event.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+        });
+        function updateStatus(button, status) {
+            const application = button.closest('.application');
+            const statusElement = document.createElement('div');
+            statusElement.classList.add('status');
+            if (status === 'approved') {
+                statusElement.textContent = 'Approved';
+            } else {
+                statusElement.textContent = 'Rejected';
+                statusElement.classList.add('rejected');
+            }
+            application.querySelector('.application-actions').remove();
+            application.appendChild(statusElement);
+        }
+  </script>
+ </head>
+ <body>
+  <div class="navbar">
+   <div class="logo">
+    <i class="fas fa-shield-alt">
+    </i>
+    Campus Security
+   </div>
+   <div class="nav-links">
+    <a href="indexA.html">
+     Home
+    <a href="vehicleA.html">
+     Vehicle
+    </a>
+   </div>
+   <div class="user-info">
+    <div class="user-icon">
+     H
+    </div>
+    <div>
+     <div>
+      Harraz
+     </div>
+     <div style="font-size: 0.8em; color: #9ca3af;">
+      Admin
+     </div>
+    </div>
+    <div class="dropdown">
+     <a href="profileA.html">
+      Profile
+     </a>
+     <a href="login.html">
+      Logout
+     </a>
+    </div>
+   </div>
+  </div>
+  <div class="content">
+    <div class="container">
+        <h1>
+         Vehicle Application Approval
+        </h1>
+        <div class="application">
+         <img alt="Image of a red Proton Saga car parked in a driveway" height="100" src="https://storage.googleapis.com/a1aa/image/e2guXruiOTxYOSgIZkmKq3vTt8tBikVDfeecjdIK8lotEjJQB.jpg" width="100"/>
+         <div class="application-details">
+          <h2>
+           AIMAN 
+          </h2>
+          <p>
+           Vehicle: Red Proton Saga
+          </p>
+          <p>
+           Plate Number: ALA 5115
+          </p>
+         </div>
+         <div class="application-actions">
+          <button class="approve" onclick="updateStatus(this, 'approved')">
+           <i class="fas fa-check">
+           </i>
+           Approve
+          </button>
+          <button class="reject" onclick="updateStatus(this, 'rejected')">
+           <i class="fas fa-times">
+           </i>
+           Reject
+          </button>
+         </div>
+        </div>
+        <div class="application">
+         <img alt="Image of a blue Perodua Myvi car parked in a parking lot" height="100" src="https://storage.googleapis.com/a1aa/image/6rz6V8B3F5rLHROWMofGdQhHv9f5gjvPeMpIYAfEZzb4EjJQB.jpg" width="100"/>
+         <div class="application-details">
+          <h2>
+           MIKAIL 
+          </h2>
+          <p>
+           Vehicle: Blue Perodua Myvi
+          </p>
+          <p>
+           Plate Number: AHA 4521
+          </p>
+         </div>
+         <div class="application-actions">
+          <button class="approve" onclick="updateStatus(this, 'approved')">
+           <i class="fas fa-check">
+           </i>
+           Approve
+          </button>
+          <button class="reject" onclick="updateStatus(this, 'rejected')">
+           <i class="fas fa-times">
+           </i>
+           Reject
+          </button>
+         </div>
+        </div>
+        <div class="application">
+         <img alt="Image of a white Proton X70 car parked on a street" height="100" src="https://storage.googleapis.com/a1aa/image/6iG2bH3VXeVDBSJNsZyeVIQjPGX08ULzMTOfAfKC8MbJFjJQB.jpg" width="100"/>
+         <div class="application-details">
+          <h2>
+           AHMAD 
+          </h2>
+          <p>
+           Vehicle: White Proton X70
+          </p>
+          <p>
+           Plate Number: WA 4224 B 
+          </p>
+         </div>
+         <div class="application-actions">
+          <button class="approve" onclick="updateStatus(this, 'approved')">
+           <i class="fas fa-check">
+           </i>
+           Approve
+          </button>
+          <button class="reject" onclick="updateStatus(this, 'rejected')">
+           <i class="fas fa-times">
+           </i>
+           Reject
+          </button>
+         </div>
+        </div>
+        <div class="application">
+         <img alt="Image of a black Perodua Aruz car parked in a garage" height="100" src="https://storage.googleapis.com/a1aa/image/y8P5bwjRDK4oKBVGLDPTN3beVyotT0E1gfmj7ipsSisNxYCUA.jpg" width="100"/>
+         <div class="application-details">
+          <h2>
+           RIDUAN
+          </h2>
+          <p>
+           Vehicle: Black Perodua Aruz
+          </p>
+          <p>
+           Plate Number: DEF321
+          </p>
+         </div>
+         <div class="application-actions">
+          <button class="approve" onclick="updateStatus(this, 'approved')">
+           <i class="fas fa-check">
+           </i>
+           Approve
+          </button>
+          <button class="reject" onclick="updateStatus(this, 'rejected')">
+           <i class="fas fa-times">
+           </i>
+           Reject
+          </button>
+         </div>
+        </div>
+        <div class="application">
+         <img alt="Image of a green Proton Iriz car parked in a residential area" height="100" src="https://storage.googleapis.com/a1aa/image/L1rGaHpz3OL8FJEAEX1paRozUSFw6XJRXfhzUIjfTG8QxYCUA.jpg" width="100"/>
+         <div class="application-details">
+          <h2>
+           SYAMSUL
+          </h2>
+          <p>
+           Vehicle: Green Proton Iriz
+          </p>
+          <p>
+           Plate Number: AHI654
+          </p>
+         </div>
+         <div class="application-actions">
+          <button class="approve" onclick="updateStatus(this, 'approved')">
+           <i class="fas fa-check">
+           </i>
+           Approve
+          </button>
+          <button class="reject" onclick="updateStatus(this, 'rejected')">
+           <i class="fas fa-times">
+           </i>
+           Reject
+          </button>
+  
+ </body>
+</html>

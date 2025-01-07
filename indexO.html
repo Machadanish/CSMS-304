@@ -1,0 +1,277 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Campus Security
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0f172a;
+            color: #fff;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #1e293b;
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+        .navbar .logo i {
+            margin-right: 10px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+            margin-left: auto;
+            margin-right: 20px;
+        }
+        .navbar .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .navbar .user-info {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+        .navbar .user-info .user-icon {
+            width: 35px;
+            height: 35px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+        }
+        .navbar .user-info .dropdown {
+            display: none;
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: #1e293b;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .user-info .dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .navbar .user-info .dropdown a:hover {
+            background-color: #3b82f6;
+        }
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .content h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .update-card {
+            background-color: #1e293b;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .update-card img {
+            width: 100%;
+            height: auto;
+        }
+        .update-card .card-content {
+            padding: 15px;
+        }
+        .update-card .card-content .title {
+            display: flex;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        .update-card .card-content .title i {
+            margin-right: 10px;
+            color: #10b981;
+        }
+        .update-card .card-content .description {
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .update-card .card-content .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: #9ca3af;
+        }
+        .post-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #5865f2;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+  </style>
+  <script>
+   document.addEventListener('DOMContentLoaded', function() {
+            const userInfo = document.querySelector('.user-info');
+            const dropdown = document.querySelector('.dropdown');
+
+            userInfo.addEventListener('click', function() {
+                dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!userInfo.contains(event.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+            const postButton = document.querySelector('.post-button');
+            postButton.addEventListener('click', function() {
+                window.location.href = 'newpostO.html';
+            });
+        });
+  </script>
+ </head>
+ <body>
+  <div class="navbar">
+   <div class="logo">
+    <i class="fas fa-shield-alt">
+    </i>
+    Campus Security
+   </div>
+   <div class="nav-links">
+    <a href="indexO.html">
+        Home
+       </a>
+       <a href="compoundO.html">
+        Compound
+       </a>
+   
+   </div>
+   <div class="user-info">
+    <div class="user-icon">
+     F
+    </div>
+    <div>
+     <div>
+      Firdaus
+     </div>
+     <div style="font-size: 0.8em; color: #9ca3af;">
+      Officer
+     </div>
+    </div>
+    <div class="dropdown">
+     <a href="profileO.html">
+      Profile
+     </a>
+     <a href="login.html">
+      Logout
+     </a>
+    </div>
+   </div>
+  </div>
+  <div class="content">
+   <h2>
+    Recent Updates
+   </h2>
+   <div class="update-card">
+    <img alt="Graduates throwing caps in the air with a city skyline in the background" height="200" src="https://storage.googleapis.com/a1aa/image/qStXEICGL5ZBGBQ8WjDt6NDFcZe4BNnV0cSF5fjcOKxc4I6TA.jpg" width="400"/>
+    <div class="card-content">
+     <div class="title">
+      <i class="fas fa-shield-alt">
+      </i>
+      New Safety Protocol: Campus Access Guidelines
+     </div>
+     <div class="description">
+      Updated guidelines for campus access during after-hours. All students must carry their ID cards and sign in at security checkpoints.
+     </div>
+     <div class="meta">
+      <div>
+       Posted by Campus Security Admin
+      </div>
+      <div>
+       3/15/2024
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="update-card">
+    <img alt="Modern building with glass windows" height="200" src="https://storage.googleapis.com/a1aa/image/EpfYyYj9ky3aE6yexDYeqkBBqcuyc9r1d55WJfkU7fEt7HRfE.jpg" width="400"/>
+    <div class="card-content">
+     <div class="title">
+      <i class="fas fa-shield-alt">
+      </i>
+      Building Security Enhancements
+     </div>
+     <div class="description">
+      New security measures have been implemented in all campus buildings to ensure the safety of students and staff.
+     </div>
+     <div class="meta">
+      <div>
+       Posted by Campus Security Admin
+      </div>
+      <div>
+       3/10/2024
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="update-card">
+    <img alt="Security personnel monitoring CCTV screens" height="200" src="https://storage.googleapis.com/a1aa/image/ilbS5LNVOc6LNBledGqDe9SPbkAQYyH9iVC4WSfLqAnf9joPB.jpg" width="400"/>
+    <div class="card-content">
+     <div class="title">
+      <i class="fas fa-shield-alt">
+      </i>
+      Increased Surveillance
+     </div>
+     <div class="description">
+      Additional surveillance cameras have been installed around the campus to monitor activities and enhance security.
+     </div>
+     <div class="meta">
+      <div>
+       Posted by Campus Security Admin
+      </div>
+      <div>
+       3/05/2024
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <button class="post-button">
+    <i class="fas fa-plus">
+    </i>
+   </button>
+  </body>
+ </html>
+ 
+ 
